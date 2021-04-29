@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { List, Typography, ListItem } from "@material-ui/core";
 import "./UserSettingSideNav.scss";
 
@@ -10,12 +10,7 @@ const sideNavMenus = [
   { name: "Billing", plan: "", index: 4 },
 ];
 
-const UserSettingSideNav = () => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const handleClickMenu = (index) => {
-    setSelectedIndex(index);
-  };
+const UserSettingSideNav = ({ selected, onClickMenu }) => {
   return (
     <div className='user-setting-side-nav'>
       {/* header */}
@@ -36,8 +31,8 @@ const UserSettingSideNav = () => {
               className='user-menu'
               button
               key={item.name}
-              selected={selectedIndex === item.index}
-              onClick={() => handleClickMenu(item.index)}
+              selected={selected === item.index}
+              onClick={() => onClickMenu(item.index)}
             >
               {item.name}
               {item.plan && <span className='user-menu-plan'>{item.plan}</span>}

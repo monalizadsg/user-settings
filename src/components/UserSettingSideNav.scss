@@ -1,12 +1,10 @@
 .user-setting-side-nav {
-  // border: 1px solid green;
-  width: 300px;
+  width: 25%;
   background-color: #ffffff;
   border-radius: 4px;
 
   .side-nav-header {
     height: 80px;
-    // border: 1px solid red;
     display: flex;
     align-items: center;
     padding: 0 25px;
@@ -31,17 +29,17 @@
         font-family: "F37Judge-MediumCondensed";
       }
     }
+
     .user-details {
       width: 70%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-content: center;
-      // border: 1px solid red;
 
       .user-plan {
         font-family: "MediumLLWeb-Bold";
-        width: 30%;
+        width: 50px;
         background-color: #76a2fe;
         font-size: 8px;
         padding: 2px;
@@ -60,16 +58,14 @@
   }
 
   .user-menus {
-    // border: 1px solid green;
     padding: 30px;
 
     .user-menu {
-      // border: 1px solid red;
       padding: 12px 18px;
 
       &.Mui-selected {
         background-color: #ffffff;
-        font-weight: 600;
+        font-family: "MediumLLWeb-Bold";
       }
     }
 
