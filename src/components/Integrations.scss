@@ -1,0 +1,67 @@
+.integrations {
+  width: 100%;
+  height: 100%;
+
+  // header
+  .integrations-header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    border-bottom: 3px solid #f4f6f8;
+
+    .title {
+      font-family: "MediumLLWeb-Bold";
+      font-size: 15px;
+    }
+  }
+
+  // content
+  .grid-container {
+    padding: 30px 0px 60px 0px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+
+    .grid-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 0;
+    }
+
+    .grid-item-details {
+      margin-left: 10px;
+
+      .details-title {
+        font-size: 15px;
+        font-family: "MediumLLWeb-Bold";
+      }
+
+      .details-description {
+        font-size: 15px;
+        font-family: "MediumLLWeb-Regular";
+      }
+    }
+
+    .grid-item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .grid-item-button {
+      .button {
+        font-family: "MediumLLWeb-Bold";
+        font-size: 14px;
+        border: none;
+        border-radius: 35px;
+        background-color: #222228;
+        color: #ffffff;
+        padding: 6px 20px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    }
+  }
+}
