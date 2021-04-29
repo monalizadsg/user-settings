@@ -1,13 +1,12 @@
 import React from "react";
 import Header from "./components/Header";
-import UserSettings from "./components/UserSettings";
-import "./styles/main.css";
+import UserSetting from "./components/UserSetting";
 
 function App() {
   return (
     <div>
       <Header />
-      <UserSettings />
+      <UserSetting />
     </div>
   );
 }

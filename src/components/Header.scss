@@ -1,0 +1,31 @@
+/* header */
+.header {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 15px 20px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #000000;
+    color: #ffffff;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .avatar-content {
+    position: absolute;
+    flex: 0 0 120px;
+    font-size: 20px;
+    font-family: "F37Judge-MediumCondensed";
+  }
+}
