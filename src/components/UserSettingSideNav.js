@@ -1,16 +1,22 @@
 import React from "react";
 import { List, Typography, ListItem } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 import "./UserSettingSideNav.scss";
 
 const sideNavMenus = [
-  { name: "Profile details", plan: "", index: 0 },
-  { name: "Integrations", plan: "", index: 1 },
-  { name: "Insights & Analytics", plan: "Upgrade", index: 2 },
-  { name: "Subscription", plan: "", index: 3 },
-  { name: "Billing", plan: "", index: 4 },
+  { name: "Profile details", path: "/profile-details", plan: "", index: 0 },
+  { name: "Integrations", path: "/integrations", plan: "", index: 1 },
+  {
+    name: "Insights & Analytics",
+    path: "/insights-and-analytics",
+    plan: "Upgrade",
+    index: 2,
+  },
+  { name: "Subscription", path: "/subscription", plan: "", index: 3 },
+  { name: "Billing", path: "/billing", plan: "", index: 4 },
 ];
 
-const UserSettingSideNav = ({ selected, onClickMenu }) => {
+const UserSettingSideNav = () => {
   return (
     <div className='user-setting-side-nav'>
       {/* header */}
@@ -26,17 +32,21 @@ const UserSettingSideNav = ({ selected, onClickMenu }) => {
       {/* menus */}
       <div className='user-menus'>
         <List>
-          {sideNavMenus.map((item) => (
-            <ListItem
-              className='user-menu'
-              button
-              key={item.name}
-              selected={selected === item.index}
-              onClick={() => onClickMenu(item.index)}
+          {sideNavMenus.map((item, index) => (
+            <NavLink
+              key={index}
+              to={item.path}
+              className='nav-link'
+              activeClassName='active-nav-link'
+              exact
             >
-              {item.name}
-              {item.plan && <span className='user-menu-plan'>{item.plan}</span>}
-            </ListItem>
+              <ListItem className='user-menu' button>
+                {item.name}
+                {item.plan && (
+                  <span className='user-menu-plan'>{item.plan}</span>
+                )}
+              </ListItem>
+            </NavLink>
           ))}
         </List>
       </div>

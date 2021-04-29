@@ -60,13 +60,17 @@
   .user-menus {
     padding: 30px;
 
+    .nav-link {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .active-nav-link {
+      font-family: "MediumLLWeb-Bold";
+    }
+
     .user-menu {
       padding: 12px 18px;
-
-      &.Mui-selected {
-        background-color: #ffffff;
-        font-family: "MediumLLWeb-Bold";
-      }
     }
 
     .user-menu-plan {

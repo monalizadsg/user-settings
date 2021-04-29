@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/styles";
+import { Switch, Route } from "react-router-dom";
 import UserSettingSideNav from "./UserSettingSideNav";
 import UserSettingContentLayout from "./UserSettingContentLayout";
 import ProfileDetails from "./ProfileDetails";
@@ -15,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#ECEEEF",
   },
   userSetting: {
-    // height: "calc(100vh - 70px)",
     display: "flex",
     justifyContent: "space-between",
     padding: "45px 20px",
@@ -24,40 +24,24 @@ const useStyles = makeStyles((theme) => ({
 
 const UserSetting = () => {
   const classes = useStyles();
-  const [selectedMenuIndex, setSelectedMenuIndex] = useState(0);
-
-  const handleClickMenu = (index) => {
-    setSelectedMenuIndex(index);
-  };
-
-  const renderMenuContent = () => {
-    if (selectedMenuIndex === 0) {
-      return <ProfileDetails />;
-    }
-    if (selectedMenuIndex === 1) {
-      return <Integrations />;
-    }
-    if (selectedMenuIndex === 2) {
-      return <InsightsAnalytics />;
-    }
-    if (selectedMenuIndex === 3) {
-      return <Subscription />;
-    }
-    if (selectedMenuIndex === 4) {
-      return <Billing />;
-    }
-  };
 
   return (
     <div className={classes.containerDisplay}>
       <Container maxWidth='xl'>
         <div className={classes.userSetting}>
-          <UserSettingSideNav
-            selected={selectedMenuIndex}
-            onClickMenu={handleClickMenu}
-          />
+          <UserSettingSideNav />
           <UserSettingContentLayout>
-            {renderMenuContent()}
+            <Switch>
+              <Route exact path='/' component={ProfileDetails} />
+              <Route path='/profile-details' component={ProfileDetails} />
+              <Route path='/integrations' component={Integrations} />
+              <Route
+                path='/insights-and-analytics'
+                component={InsightsAnalytics}
+              />
+              <Route path='/subscription' component={Subscription} />
+              <Route path='/billing' component={Billing} />
+            </Switch>
           </UserSettingContentLayout>
         </div>
       </Container>
