@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, MenuItem } from "@material-ui/core";
 import TextInput from "./TextInput";
+import SelectInput from "./SelectInput";
 import "./Billing.scss";
 
 const Billing = () => {
@@ -120,22 +121,28 @@ const Billing = () => {
             />
             <Grid container item direction='row' spacing={1}>
               <Grid item sm={12} md={6}>
-                <TextInput
+                <SelectInput
                   label='Country *'
                   name='country'
                   value={billingInfo.country}
                   onChange={handleOnChange}
-                  error={errors.country}
-                />
+                >
+                  <MenuItem value='USA'>USA</MenuItem>
+                  <MenuItem value='Sweden'>Sweden</MenuItem>
+                  <MenuItem value='Canada'>Canada</MenuItem>
+                </SelectInput>
               </Grid>
               <Grid item sm={12} md={6}>
-                <TextInput
+                <SelectInput
                   label='State *'
                   name='state'
                   value={billingInfo.state}
                   onChange={handleOnChange}
-                  error={errors.state}
-                />
+                >
+                  <MenuItem value='CA'>CA</MenuItem>
+                  <MenuItem value='LA'>LA</MenuItem>
+                  <MenuItem value='NY'>NY</MenuItem>
+                </SelectInput>
               </Grid>
             </Grid>
             <Grid container item direction='row' spacing={1}>
