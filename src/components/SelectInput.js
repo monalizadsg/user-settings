@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "MediumLLWeb-Regular",
   },
   margin: {
-    margin: "20px 0 15px 0",
+    margin: "10px 0",
     width: "100%",
   },
   paper: {
