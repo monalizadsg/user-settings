@@ -11,34 +11,6 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import "./Subscription.scss";
 import SubscriptionAddUser from "./SubscriptionAddUser";
 
-// dummy data
-const data = [
-  {
-    name: "Jonas Hammarberg",
-    avatar: "AB",
-    email: "jonas.hammarberg@meetingmaker.se",
-    role: "admin",
-    subscription: "Enterprise",
-    lastActivity: "April 2, 2021",
-  },
-  {
-    name: "Jonas Hammarberg",
-    avatar: "AB",
-    email: "jonas.hammarberg@meetingmaker.se",
-    role: "user",
-    subscription: "Enterprise",
-    lastActivity: "April 2, 2021",
-  },
-  {
-    name: "Jonas Hammarberg",
-    avatar: "AB",
-    email: "jonas.hammarberg@meetingmaker.se",
-    role: "user",
-    subscription: "Enterprise",
-    lastActivity: "April 2, 2021",
-  },
-];
-
 // more icon menu items
 const moreIconMenus = [
   "Edit user info",
@@ -96,8 +68,39 @@ const useStyles = makeStyles({
 
 const Subscription = () => {
   const classes = useStyles();
+  // dummy data
+  const [data, setData] = useState([
+    {
+      name: "Jonas Hammarberg",
+      avatar: "AB",
+      email: "jonas.hammarberg@meetingmaker.se",
+      role: "admin",
+      subscription: "Enterprise",
+      lastActivity: "April 2, 2021",
+    },
+    {
+      name: "Jonas Hammarberg",
+      avatar: "AB",
+      email: "jonas.hammarberg@meetingmaker.se",
+      role: "user",
+      subscription: "Enterprise",
+      lastActivity: "April 2, 2021",
+    },
+    {
+      name: "Jonas Hammarberg",
+      avatar: "AB",
+      email: "jonas.hammarberg@meetingmaker.se",
+      role: "user",
+      subscription: "Enterprise",
+      lastActivity: "April 2, 2021",
+    },
+  ]);
   const [isAddUser, setIsAddUser] = useState(false);
   const [selectMenu, setSelectMenu] = useState(null);
+  const [allocatedUsers, setAllocatedUsers] = useState({
+    current: data.length,
+    total: 3,
+  });
 
   const handleCloseAddUser = () => {
     setIsAddUser(false);
@@ -115,6 +118,21 @@ const Subscription = () => {
     setSelectMenu(null);
   };
 
+  const handleAddUser = (user) => {
+    // console.log(user);
+    const newUser = {
+      name: `${user.firstName}  ${user.lastName}`,
+      avatar: "AB",
+      email: user.email,
+      role: user.role,
+      subscription: user.subscription,
+      lastActivity: "April 2, 2021",
+    };
+    const newData = [...data];
+    newData.unshift(newUser);
+    setData(newData);
+  };
+
   return (
     <>
       {!isAddUser && (
@@ -129,10 +147,21 @@ const Subscription = () => {
 
           {/* sub-heading */}
           <div className='subscription-sub-heading'>
-            <Typography className='sub-heading-paragraph'>
-              <span className='sub-heading-highlight'>3 of 10 </span> user seats
-              allocated
-            </Typography>
+            {allocatedUsers.current > allocatedUsers.total ? (
+              <Typography className='sub-heading-highlight'>
+                Your current subscription have ({allocatedUsers.total}) users
+                and {allocatedUsers.current} users are allocated. Your account
+                will be charged with{" "}
+                {allocatedUsers.current - allocatedUsers.total} extra user(s).
+              </Typography>
+            ) : (
+              <Typography className='sub-heading-paragraph'>
+                <span className='sub-heading-highlight'>
+                  {allocatedUsers.current} of {allocatedUsers.total}{" "}
+                </span>{" "}
+                user seats allocated
+              </Typography>
+            )}
           </div>
 
           {/* table */}
@@ -174,7 +203,6 @@ const Subscription = () => {
                           </div>
                           <div className='tablebody-name-details'>
                             <div className='tablebody-details-name'>
-                              {" "}
                               {p.name}
                             </div>
                             <div className='tablebody-details-email'>
@@ -197,7 +225,7 @@ const Subscription = () => {
                       </TableCell>
                       <TableCell
                         classes={{ root: classes.tableBody }}
-                        style={{ paddingRight: "114px" }}
+                        style={{ paddingRight: "110px" }}
                         align='right'
                       >
                         <MoreHorizIcon
@@ -230,7 +258,14 @@ const Subscription = () => {
           </TableContainer>
         </div>
       )}
-      {isAddUser && <SubscriptionAddUser onClose={handleCloseAddUser} />}
+
+      {/* Add new user form */}
+      {isAddUser && (
+        <SubscriptionAddUser
+          onClose={handleCloseAddUser}
+          onAddUser={handleAddUser}
+        />
+      )}
     </>
   );
 };

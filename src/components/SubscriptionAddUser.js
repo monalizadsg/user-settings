@@ -5,7 +5,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 import "./SubscriptionAddUser.scss";
 
-const SubscriptionAddUser = ({ onClose }) => {
+const SubscriptionAddUser = ({ onClose, onAddUser }) => {
   const [newUser, setNewUser] = useState({
     firstName: "Erik",
     lastName: "Wibom",
@@ -29,7 +29,11 @@ const SubscriptionAddUser = ({ onClose }) => {
       return;
     }
 
-    console.log(newUser);
+    // console.log(newUser);
+    onAddUser(newUser);
+
+    // go back to subscription
+    onClose();
   };
 
   const validateForm = () => {
