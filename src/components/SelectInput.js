@@ -19,13 +19,9 @@ const CustomTextField = withStyles((theme) => ({
     width: "100%",
     padding: "10px 12px",
     fontFamily: "MediumLLWeb-Bold",
-    textTransform: "uppercase",
     "&:focus": {
       borderRadius: 6,
       backgroundColor: "#F4F6F8",
-    },
-    "& > .MuiInputBase-input": {
-      textTransform: "uppercase",
     },
   },
 }))(InputBase);

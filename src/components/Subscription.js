@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Menu, MenuItem } from "@material-ui/core";
+import { Typography, Menu, MenuItem, Select } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,8 +8,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import "./Subscription.scss";
 import SubscriptionAddUser from "./SubscriptionAddUser";
+import "./Subscription.scss";
 
 // more icon menu items
 const moreIconMenus = [
@@ -64,6 +64,15 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     marginRight: 5,
   },
+  selectInput: {
+    backgroundColor: "#F4F6F8",
+    fontSize: 12,
+    width: "100%",
+    fontFamily: "MediumLLWeb-Bold",
+    "&:focus": {
+      backgroundColor: "#F4F6F8",
+    },
+  },
 });
 
 const Subscription = () => {
@@ -71,27 +80,30 @@ const Subscription = () => {
   // dummy data
   const [data, setData] = useState([
     {
+      id: 1,
       name: "Jonas Hammarberg",
       avatar: "AB",
       email: "jonas.hammarberg@meetingmaker.se",
       role: "admin",
-      subscription: "Enterprise",
+      subscriptionPlan: "Enterprise",
       lastActivity: "April 2, 2021",
     },
     {
+      id: 2,
       name: "Jonas Hammarberg",
       avatar: "AB",
       email: "jonas.hammarberg@meetingmaker.se",
       role: "user",
-      subscription: "Enterprise",
+      subscriptionPlan: "Enterprise",
       lastActivity: "April 2, 2021",
     },
     {
+      id: 3,
       name: "Jonas Hammarberg",
       avatar: "AB",
       email: "jonas.hammarberg@meetingmaker.se",
       role: "user",
-      subscription: "Enterprise",
+      subscriptionPlan: "Enterprise",
       lastActivity: "April 2, 2021",
     },
   ]);
@@ -101,6 +113,16 @@ const Subscription = () => {
     current: data.length,
     total: 3,
   });
+
+  const handleSubscriptionPlanChange = (event, id) => {
+    const newData = [...data].map((user) =>
+      user.id === id
+        ? Object.assign(user, { subscriptionPlan: event.target.value })
+        : user
+    );
+
+    setData(newData);
+  };
 
   const handleCloseAddUser = () => {
     setIsAddUser(false);
@@ -119,13 +141,12 @@ const Subscription = () => {
   };
 
   const handleAddUser = (user) => {
-    // console.log(user);
     const newUser = {
       name: `${user.firstName}  ${user.lastName}`,
       avatar: "AB",
       email: user.email,
       role: user.role,
-      subscription: user.subscription,
+      subscriptionPlan: user.subscription,
       lastActivity: "April 2, 2021",
     };
     const newData = [...data];
@@ -189,9 +210,9 @@ const Subscription = () => {
               </TableHead>
 
               <TableBody>
-                {data.map((p, index) => {
+                {data.map((p) => {
                   return (
-                    <TableRow key={index}>
+                    <TableRow key={p.id}>
                       <TableCell
                         classes={{ root: classes.tableBody }}
                         component='th'
@@ -218,7 +239,22 @@ const Subscription = () => {
                         {p.role}
                       </TableCell>
                       <TableCell classes={{ root: classes.tableBody }}>
-                        {p.subscription}
+                        <Select
+                          value={p.subscriptionPlan}
+                          onChange={(event) =>
+                            handleSubscriptionPlanChange(event, p.id)
+                          }
+                          disableUnderline
+                          classes={{ root: classes.selectInput }}
+                        >
+                          <MenuItem value='Freemium'>Freemium</MenuItem>
+                          <MenuItem value='Premium'>Premium</MenuItem>
+
+                          <MenuItem value='Enterprise'>Enterprise</MenuItem>
+                          <MenuItem value='Allocate subscription'>
+                            Allocate subscription
+                          </MenuItem>
+                        </Select>
                       </TableCell>
                       <TableCell classes={{ root: classes.tableBody }}>
                         {p.lastActivity}

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, MenuItem } from "@material-ui/core";
 import TextInput from "./TextInput";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
+import SelectInput from "./SelectInput";
 import "./SubscriptionAddUser.scss";
 
 const SubscriptionAddUser = ({ onClose, onAddUser }) => {
@@ -128,6 +129,19 @@ const SubscriptionAddUser = ({ onClose, onAddUser }) => {
                   onChange={handleOnChange}
                   error={errors.subscription}
                 />
+                <SelectInput
+                  label='Subscription'
+                  name='subscription'
+                  value={newUser.state}
+                  onChange={handleOnChange}
+                >
+                  <MenuItem value='Freemium'>Freemium</MenuItem>
+                  <MenuItem value='Premium'>Premium</MenuItem>
+                  <MenuItem value='Enterprise'>Enterprise</MenuItem>
+                  <MenuItem value='Allocate subscription'>
+                    Allocate subscription
+                  </MenuItem>
+                </SelectInput>
               </Grid>
               <Grid item sm={12} md={6}>
                 <TextInput
