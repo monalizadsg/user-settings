@@ -11,7 +11,6 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import SubscriptionAddUser from "./SubscriptionAddUser";
 import "./Subscription.scss";
 
-// more icon menu items
 const moreIconMenus = [
   "Edit user info",
   "Make Admin",
@@ -45,12 +44,15 @@ const useStyles = makeStyles({
     borderBottom: "none",
     backgroundColor: "#ffffff",
     fontSize: 15,
+    padding: 0,
+    paddingLeft: 16,
     fontFamily: "MediumLLWeb-Regular",
   },
   tableBody: {
-    backgroundColor: "#F4F6F8",
     fontSize: 12,
     fontFamily: "MediumLLWeb-Bold",
+    padding: 0,
+    borderBottom: "none",
   },
   menuItem: {
     fontSize: 14,
@@ -71,6 +73,14 @@ const useStyles = makeStyles({
     fontFamily: "MediumLLWeb-Bold",
     "&:focus": {
       backgroundColor: "#F4F6F8",
+    },
+  },
+  selectDropdownStyle: {
+    left: "50%",
+    transform: "translateX(-77%) translateY(32%)",
+    "& .MuiMenuItem-root": {
+      fontFamily: "MediumLLWeb-Regular",
+      fontSize: 12,
     },
   },
 });
@@ -158,7 +168,6 @@ const Subscription = () => {
     <>
       {!isAddUser && (
         <div className='subscription'>
-          {/* header */}
           <div className='subscription-header'>
             <Typography className='title'>Subscription</Typography>
             <button className='button' onClick={handleOpenAddUser}>
@@ -166,7 +175,6 @@ const Subscription = () => {
             </button>
           </div>
 
-          {/* sub-heading */}
           <div className='subscription-sub-heading'>
             {allocatedUsers.current > allocatedUsers.total ? (
               <Typography className='sub-heading-highlight'>
@@ -185,11 +193,13 @@ const Subscription = () => {
             )}
           </div>
 
-          {/* table */}
           <TableContainer className='table-container'>
             <Table stickyHeader aria-label='sticky table'>
               <TableHead>
                 <TableRow>
+                  <TableCell
+                    classes={{ root: classes.tableHeader }}
+                  ></TableCell>
                   <TableCell classes={{ root: classes.tableHeader }}>
                     Name
                   </TableCell>
@@ -204,87 +214,108 @@ const Subscription = () => {
                   </TableCell>
                   <TableCell
                     classes={{ root: classes.tableHeader }}
-                    align='right'
+                    style={{ paddingRight: "50px" }}
                   ></TableCell>
                 </TableRow>
               </TableHead>
 
               <TableBody>
-                {data.map((p) => {
+                {data.map((p, index) => {
                   return (
-                    <TableRow key={p.id}>
+                    <TableRow key={index}>
                       <TableCell
                         classes={{ root: classes.tableBody }}
                         component='th'
                         scope='row'
+                        style={{ width: 100 }}
                       >
-                        <div className='tablebody-name-wrapper'>
-                          <div className='tablebody-name-avatar'>
-                            {p.avatar}
-                          </div>
-                          <div className='tablebody-name-details'>
-                            <div className='tablebody-details-name'>
-                              {p.name}
-                            </div>
-                            <div className='tablebody-details-email'>
-                              {p.email}
-                            </div>
+                        <div
+                          className='tablecell avatar-bg-light-gray'
+                          style={{ width: 100 }}
+                        >
+                          <div className='avatar-bg-white'>
+                            <div className='avatar'>{p.avatar}</div>
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell
-                        classes={{ root: classes.tableBody }}
-                        style={{ textTransform: "uppercase" }}
-                      >
-                        {p.role}
+                      <TableCell classes={{ root: classes.tableBody }}>
+                        <div className='tablecell padding-left'>
+                          <div className='name-details'>
+                            <div className='name'>{p.name}</div>
+                            <div className='email'>{p.email}</div>
+                          </div>
+                        </div>
                       </TableCell>
                       <TableCell classes={{ root: classes.tableBody }}>
-                        <Select
-                          value={p.subscriptionPlan}
-                          onChange={(event) =>
-                            handleSubscriptionPlanChange(event, p.id)
-                          }
-                          disableUnderline
-                          classes={{ root: classes.selectInput }}
+                        <div
+                          style={{ textTransform: "uppercase" }}
+                          className='tablecell padding-left'
                         >
-                          <MenuItem value='Freemium'>Freemium</MenuItem>
-                          <MenuItem value='Premium'>Premium</MenuItem>
-
-                          <MenuItem value='Enterprise'>Enterprise</MenuItem>
-                          <MenuItem value='Allocate subscription'>
-                            Allocate subscription
-                          </MenuItem>
-                        </Select>
+                          {p.role}
+                        </div>
                       </TableCell>
                       <TableCell classes={{ root: classes.tableBody }}>
-                        {p.lastActivity}
-                      </TableCell>
-                      <TableCell
-                        classes={{ root: classes.tableBody }}
-                        style={{ paddingRight: "110px" }}
-                        align='right'
-                      >
-                        <MoreHorizIcon
-                          className='tablebody-more-icon'
-                          onClick={handleClickMoreIcon}
-                        />
-                        <StyledMenu
-                          anchorEl={selectMenu}
-                          keepMounted
-                          open={Boolean(selectMenu)}
-                          onClose={handleClose}
-                        >
-                          {moreIconMenus.map((menu, index) => (
-                            <MenuItem
-                              key={index}
-                              className={classes.menuItem}
-                              onClick={handleClose}
-                            >
-                              <span className={classes.menuBulletPoint}></span>
-                              {menu}
+                        <div className='tablecell padding-left'>
+                          <Select
+                            value={p.subscriptionPlan}
+                            onChange={(event) =>
+                              handleSubscriptionPlanChange(event, p.id)
+                            }
+                            disableUnderline
+                            classes={{ root: classes.selectInput }}
+                            MenuProps={{
+                              classes: { paper: classes.selectDropdownStyle },
+                              getContentAnchorEl: null,
+                              anchorOrigin: {
+                                vertical: "bottom",
+                                horizontal: "center",
+                              },
+                              transformOrigin: {
+                                vertical: "top",
+                                horizontal: "center",
+                              },
+                            }}
+                          >
+                            <MenuItem value='Freemium'>Freemium</MenuItem>
+                            <MenuItem value='Premium'>Premium</MenuItem>
+                            <MenuItem value='Enterprise'>Enterprise</MenuItem>
+                            <MenuItem value='Allocate subscription'>
+                              Allocate subscription
                             </MenuItem>
-                          ))}
-                        </StyledMenu>
+                          </Select>
+                        </div>
+                      </TableCell>
+                      <TableCell classes={{ root: classes.tableBody }}>
+                        <div className='tablecell padding-left'>
+                          {p.lastActivity}
+                        </div>
+                      </TableCell>
+                      <TableCell classes={{ root: classes.tableBody }}>
+                        <div className='tablecell padding-left'>
+                          <MoreHorizIcon
+                            className='more-icon'
+                            onClick={handleClickMoreIcon}
+                          />
+                          <StyledMenu
+                            anchorEl={selectMenu}
+                            keepMounted
+                            open={Boolean(selectMenu)}
+                            onClose={handleClose}
+                          >
+                            {moreIconMenus.map((menu, index) => (
+                              <MenuItem
+                                key={index}
+                                className={classes.menuItem}
+                                onClick={handleClose}
+                              >
+                                <span
+                                  className={classes.menuBulletPoint}
+                                ></span>
+                                {menu}
+                              </MenuItem>
+                            ))}
+                          </StyledMenu>
+                        </div>
                       </TableCell>
                     </TableRow>
                   );
