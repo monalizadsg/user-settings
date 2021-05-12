@@ -68,14 +68,12 @@ const ProfileDetails = () => {
 
   return (
     <div className='profile-details'>
-      {/* header */}
       <div className='profile-details-header'>
         <Typography className='title'>Profile details</Typography>
       </div>
-      {/* form */}
+
       <div className='container'>
         <form className='form' autoComplete='off' onSubmit={handleSubmit}>
-          {/* left column */}
           <div className='form-left-column'>
             <TextInput
               label='First Name'
@@ -104,11 +102,9 @@ const ProfileDetails = () => {
             />
           </div>
 
-          {/* right column */}
           <div className='form-right-column'>
             {!isChangePassword && (
               <div className='form-right-column-wrapper'>
-                {/* password */}
                 <div className='form-right-column-text-input'>
                   <TextInput
                     type='password'
@@ -128,7 +124,6 @@ const ProfileDetails = () => {
               </div>
             )}
 
-            {/* change password form */}
             {isChangePassword && (
               <div className='form-right-column-wrapper'>
                 <div className='form-right-column-text-input'>
@@ -157,15 +152,14 @@ const ProfileDetails = () => {
           </div>
         </form>
 
-        {/* delete profile  */}
         <div className='delete-profile'>
-          <Typography className='delete-button'>
+          <Typography className='delete-profile-button'>
             <span className='highlight'>Delete</span> my profile
           </Typography>
-          <Typography className='note'>
+          <Typography className='delete-profile-note'>
             You will receive an email to confirm your decision.
           </Typography>
-          <Typography className='note'>
+          <Typography className='delete-profile-note'>
             Please note, that all boards you have created will permanently
             erased.
           </Typography>

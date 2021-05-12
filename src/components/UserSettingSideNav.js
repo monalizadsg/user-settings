@@ -19,7 +19,6 @@ const sideNavMenus = [
 const UserSettingSideNav = () => {
   return (
     <div className='user-setting-side-nav'>
-      {/* header */}
       <div className='side-nav-header'>
         <div className='user-avatar'>
           <Typography className='avatar-content'>HE</Typography>
@@ -29,7 +28,7 @@ const UserSettingSideNav = () => {
           <Typography className='user-name'>Jonas Hammarberg</Typography>
         </div>
       </div>
-      {/* menus */}
+
       <div className='user-menus'>
         <List>
           {sideNavMenus.map((item, index) => (

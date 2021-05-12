@@ -55,12 +55,10 @@ const integrationsList = [
 const Integrations = () => {
   return (
     <div className='integrations'>
-      {/* header */}
       <div className='integrations-header'>
         <Typography className='title'>Integrations</Typography>
       </div>
 
-      {/* content */}
       <Grid className='grid-container' container spacing={0}>
         {integrationsList.map((item, index) => (
           <Grid

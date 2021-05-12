@@ -12,8 +12,9 @@ import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   containerDisplay: {
-    width: "100%",
+    width: "90%",
     backgroundColor: "#ECEEEF",
+    margin: "0 auto",
   },
   userSetting: {
     display: "flex",

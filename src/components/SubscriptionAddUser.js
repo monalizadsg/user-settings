@@ -79,7 +79,6 @@ const SubscriptionAddUser = ({ onClose, onAddUser }) => {
 
   return (
     <div className='subscription-add-user'>
-      {/* header */}
       <div className='subscription-add-user-header'>
         <Typography className='title'>Add user</Typography>
         <IconButton onClick={onClose}>
@@ -87,7 +86,6 @@ const SubscriptionAddUser = ({ onClose, onAddUser }) => {
         </IconButton>
       </div>
 
-      {/* form */}
       <form noValidate autoComplete='off'>
         <Grid className='grid-container' container>
           <Grid container item md={6} direction='column'>

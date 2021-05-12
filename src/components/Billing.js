@@ -94,16 +94,15 @@ const Billing = () => {
 
   return (
     <div className='billing'>
-      {/* header */}
       <div className='billing-header'>
         <Typography className='title'>Billing Information</Typography>
         <button className='button' onClick={handleOnSave}>
           Save
         </button>
       </div>
-      {/* form */}
+
       <form noValidate autoComplete='off'>
-        <Grid className='grid-container' container spacing={5}>
+        <Grid className='grid-container' container spacing={3}>
           <Grid container item md={6} direction='column'>
             <TextInput
               label='First Name *'
